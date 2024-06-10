@@ -1,0 +1,37 @@
+GET http://localhost:3000/api/ok
+
+###
+GET http://localhost:3000/api/state
+
+###
+GET http://localhost:3000/api/city
+
+###
+
+GET http://localhost:3000/api/restaurant
+
+###
+GET http://localhost:3000/api/category
+
+###
+GET http://localhost:3000/api/order_menu_item
+
+###
+GET http://localhost:3000/api/menu_item
+###
+GET http://localhost:3000/api/orders
+###
+GET http://localhost:3000/api/address
+###
+GET http://localhost:3000/api/comment
+###
+GET http://localhost:3000/api/Restaurant_owner
+
+###
+GET http://localhost:3000/api/users
+###
+GET http://localhost:3000/api/driver
+###
+GET http://localhost:3000/api/order_status
+###
+GET http://localhost:3000/api/status_catalog
