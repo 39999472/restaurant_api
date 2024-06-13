@@ -1,37 +1,43 @@
 GET http://localhost:3000/api/ok
 
 ###
-GET http://localhost:3000/api/state
+GET http://localhost:3000/api/users
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJraW55dWEiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3MTgyMjgyMTJ9.TGq8URrLuD3TQlmciepjjMY1M3HivJ_cesQg85fTfwU
 
 ###
-GET http://localhost:3000/api/city
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+    "id":1,
+    "contact_phone":"+25434",
+    "contact_email":"<EMAIL>",
+    "contact_name":"<NAME>"
+}
+###
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+    "userId":1,
+    "username":"kinyua",
+    "password":"pass",
+    "role":"admin"
+    
+}
 
 ###
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
 
-GET http://localhost:3000/api/restaurant
-
-###
-GET http://localhost:3000/api/category
-
-###
-GET http://localhost:3000/api/order_menu_item
-
-###
-GET http://localhost:3000/api/menu_item
-###
-GET http://localhost:3000/api/orders
-###
-GET http://localhost:3000/api/address
-###
-GET http://localhost:3000/api/comment
-###
-GET http://localhost:3000/api/Restaurant_owner
-
+{
+    "username":"kinyua",
+    "password":"pass"
+}
 ###
 GET http://localhost:3000/api/users
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtb3NlcyIsInJvbGUiOiJ1c2VyIiwiZXhwIjoxNzE4MjA0MDc4fQ.PJ3hQ2afQCHAtlzSvnu_PlcL3TBRZZvjXruEkRyJGaU
 ###
-GET http://localhost:3000/api/driver
-###
-GET http://localhost:3000/api/order_status
-###
-GET http://localhost:3000/api/status_catalog
+GET http://localhost:3000/api/state
+
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJraW55dWEiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3MTgyNjAwMjl9.LxIpl0eSzWl3m8hzzM3N3LcItUzVtSCC_d1XP6Z0-G4

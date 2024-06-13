@@ -2,19 +2,20 @@ import {Hono} from 'hono';
 import{zValidator} from "@hono/zod-validator"
 import{list_users,get_users,create_users,update_users} from "./users.controller"
 import { stateZod } from '../validators';
+import{adminRoleAuth, userRoleAuth} from "../middleware/bearAuth"
 export const usersRouters=new Hono()
 
 
 
 
 //get all state
-usersRouters.get("/users", list_users)
+usersRouters.get("/users",adminRoleAuth, list_users)
 
 
 
 //find one state
 
-usersRouters.get("/users/:id",get_users)
+usersRouters.get("/users/:id",userRoleAuth,get_users)
 //create a state
 usersRouters.post("/users",zValidator('json',stateZod,(result,c)=>{
     if(!result.success){
@@ -23,3 +24,5 @@ usersRouters.post("/users",zValidator('json',stateZod,(result,c)=>{
 }),create_users)
 //update a state
 usersRouters.put("/users/:id",update_users)
+
+

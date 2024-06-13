@@ -31,6 +31,7 @@ export const get_users = async (c: Context) => {
 export const create_users = async (c: Context) => {
     try {
         const users = await c.req.json();
+    
         const created_users= await create_usersService(users);
 
 

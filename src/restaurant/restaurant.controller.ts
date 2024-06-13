@@ -1,6 +1,6 @@
 import {Context} from "hono"
 
-    import {restaurantService,getRestaurantService,createRestaurantService ,updateRestaurantService, deleteRestaurantService } from "./restaurant.service"
+    import {restaurantService,getRestaurantService , createRestaurantService,updateRestaurantService, deleteRestaurantService } from "./restaurant.service"
 
 export const listRestaurant= async (c: Context) => {
     try {
@@ -49,8 +49,8 @@ export const updateRestaurant= async (c: Context) => {
     const restaurant= await c.req.json();
     try {
         // search for the user
-        const searchedRestaurant = await getRestaurantService(id);
-        if (searchedRestaurant == undefined) return c.text("restaurant not found", 404);
+        const searched_restaurant = await getRestaurantService(id);
+        if (searched_restaurant == undefined) return c.text("restaurant not found", 404);
         // get the data and update it
         const res = await updateRestaurantService(id,restaurant);
         // return a success message
@@ -62,7 +62,7 @@ export const updateRestaurant= async (c: Context) => {
     }
 }
 
-export const deleteState = async (c: Context) => {
+export const deleteRestaurant= async (c: Context) => {
     const id = Number(c.req.param("id"));
     if (isNaN(id)) return c.text("Invalid ID", 400);
 

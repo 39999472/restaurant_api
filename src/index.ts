@@ -18,6 +18,7 @@ import { restaurant_ownerRouters } from './restaurant_owner/restaurant_owner.rou
 import { usersRouters } from './users/users.routers'
 import { order_statusRouters } from './order_status/order_status.routers'
 import{status_catalogRouters} from './status_catalog/status_catalog.routers'
+import{authRouters} from './auth/auth.routers'
 const app=new Hono().basePath('/api');
 
 
@@ -44,6 +45,7 @@ app.route("/",restaurant_ownerRouters)
 app.route("/",usersRouters)
 app.route("/",order_statusRouters)
 app.route("/",status_catalogRouters)
+app.route("auth/",authRouters)
 
 const port= 3000
 console.log(`Server is running on port ${port}`)

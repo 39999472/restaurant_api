@@ -1,5 +1,5 @@
 import{relations} from "drizzle-orm";
-import { boolean } from "drizzle-orm/pg-core";
+import { boolean, pgEnum } from "drizzle-orm/pg-core";
 import {pgTable,serial,text,varchar,integer,timestamp,} from "drizzle-orm/pg-core";
 export const cityTable=pgTable("city",{
     id:serial("id").primaryKey(),
@@ -192,6 +192,23 @@ export const cityTable=pgTable("city",{
 //     })
 // }));
 
+export const roleEnum=pgEnum("role",["admin","user"])
+export const AuthOnUsersTable=pgTable("auth_on_users",{
+    id:serial("id").primaryKey(),
+    userId:integer("user_id").notNull().references(()=>usersTable.id,{onDelete:"cascade"}),
+    password:varchar("password",{length:100}),
+    
+    username:varchar("username",{length:100}),
+    role:roleEnum("role").default("user")
+});
+
+export const AuthOnUsersRelations =relations(AuthOnUsersTable,({one})=>({
+    user:one(usersTable,{
+        fields:[AuthOnUsersTable.userId],
+        references:[usersTable.id]
+    })
+}));
+
 
 export const restaurantRelations = relations(restaurantTable, ({ many, one }) => ({
     menuItems: many(menu_itemTable),
@@ -365,3 +382,5 @@ export type TI_driver = typeof driverTable.$inferInsert;
 export type TS_driver = typeof driverTable.$inferSelect;
 export type TI_restaurant_owner = typeof restaurant_ownerTable.$inferInsert;
 export type TS_restaurant_owner = typeof restaurant_ownerTable.$inferSelect;
+export type TSAuthOnUser=typeof AuthOnUsersTable.$inferSelect;
+export type TIAuthOnUser=typeof AuthOnUsersTable.$inferInsert;
