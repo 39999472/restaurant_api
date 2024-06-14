@@ -13,7 +13,7 @@ categoryRouters.get("/category",adminRoleAuth ,listCategory)
 
 
 
-//find one state
+
 
 categoryRouters.get("/category/:id",userRoleAuth,getCategory)
 //create a state
@@ -22,7 +22,7 @@ categoryRouters.post("/category",zValidator('json',stateZod,(result,c)=>{
         return c.json(result.error,400)
     }
 }),createCategory)
-//update a state
+
 categoryRouters.put("/category/:id",updateCategory)
 
 

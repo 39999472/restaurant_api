@@ -4,7 +4,7 @@ import {Context} from "hono"
 
 export const list_address = async (c: Context) => {
     try {
-        //limit the number of users to be returned
+        
 
         const limit = Number(c.req.query('limit'))
 
@@ -48,12 +48,12 @@ export const update_address= async (c: Context) => {
 
     const address= await c.req.json();
     try {
-        // search for the user
+        
         const searched_address = await get_addressService(id);
         if (searched_address == undefined) return c.text("address not found", 404);
-        // get the data and update it
+        
         const res = await update_addressService(id, address);
-        // return a success message
+        
         if (!res) return c.text("address not updated", 404);
 
         return c.json({ msg: res }, 201);
@@ -67,10 +67,10 @@ export const delete_address = async (c: Context) => {
     if (isNaN(id)) return c.text("Invalid ID", 400);
 
     try {
-        //search for the user
+        
         const address= await get_addressService(id);
         if (address == undefined) return c.text("address not found", 404);
-        //deleting the user
+        
         const res = await delete_addressService(id);
         if (!res) return c.text("address not deleted", 404);
 

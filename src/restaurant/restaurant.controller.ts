@@ -48,12 +48,12 @@ export const updateRestaurant= async (c: Context) => {
 
     const restaurant= await c.req.json();
     try {
-        // search for the user
+        
         const searched_restaurant = await getRestaurantService(id);
         if (searched_restaurant == undefined) return c.text("restaurant not found", 404);
-        // get the data and update it
+        
         const res = await updateRestaurantService(id,restaurant);
-        // return a success message
+        
         if (!res) return c.text("restaurant not updated", 404);
 
         return c.json({ msg: res }, 201);
@@ -67,10 +67,10 @@ export const deleteRestaurant= async (c: Context) => {
     if (isNaN(id)) return c.text("Invalid ID", 400);
 
     try {
-        //search for the user
+        
         const restaurant = await getRestaurantService(id);
         if (restaurant == undefined) return c.text("restaurant not found", 404);
-        //deleting the user
+        
         const res = await deleteRestaurantService(id);
         if (!res) return c.text("restaurant not deleted", 404);
 

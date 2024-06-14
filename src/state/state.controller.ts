@@ -4,7 +4,7 @@ import {Context} from "hono"
 
 export const listState = async (c: Context) => {
     try {
-        //limit the number of users to be returned
+        
 
         const limit = Number(c.req.query('limit'))
 
@@ -48,12 +48,12 @@ export const updateState= async (c: Context) => {
 
     const state= await c.req.json();
     try {
-        // search for the user
+        
         const searchedState = await getStateService(id);
         if (searchedState == undefined) return c.text("state not found", 404);
-        // get the data and update it
+        
         const res = await updateStateService(id, state);
-        // return a success message
+        
         if (!res) return c.text("state not updated", 404);
 
         return c.json({ msg: res }, 201);
@@ -67,10 +67,10 @@ export const deleteState = async (c: Context) => {
     if (isNaN(id)) return c.text("Invalid ID", 400);
 
     try {
-        //search for the user
+        
         const state = await getStateService(id);
         if (state == undefined) return c.text("state not found", 404);
-        //deleting the user
+        
         const res = await deleteStateService(id);
         if (!res) return c.text("state not deleted", 404);
 

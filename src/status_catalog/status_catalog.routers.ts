@@ -8,19 +8,19 @@ export const status_catalogRouters=new Hono()
 
 
 
-//get all state
+
 status_catalogRouters.get("/status_catalog",adminRoleAuth, list_status_catalog)
 
 
 
-//find one state
+
 status_catalogRouters.get("/status_catalog/:id",userRoleAuth,get_status_catalog)
-//create a state
+
 status_catalogRouters.post("/status_catalog",zValidator('json',stateZod,(result,c)=>{
     if(!result.success){
         return c.json(result.error,400)
     }
 }),create_status_catalog)
-//update a state
+
 status_catalogRouters.put("/status_catalog/:id",update_status_catalog)
 

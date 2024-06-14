@@ -13,16 +13,16 @@ ordersRouters.get("/orders",adminRoleAuth, list_orders)
 
 
 
-//find one state
+
 
 ordersRouters.get("/orders/:id",userRoleAuth,get_orders)
-//create a state
+
 ordersRouters.post("/orders",zValidator('json',stateZod,(result,c)=>{
     if(!result.success){
         return c.json(result.error,400)
     }
 }),create_orders)
-//update a state
+
 ordersRouters.put("/orders/:id",update_orders)
 
 

@@ -1,4 +1,79 @@
-GET http://localhost:3000/api/ok
+
+GET http://localhost:3000/api/users
+###
+
+GET http://localhost:3000/api/users/1
+###
+
+PUT http://localhost:3000/api/users/1
+Content-Type: application/json
+  {
+    "id": 4,
+    "name": "moses",
+    "contact_phone": "+25407999",
+    "email": "@gmail",
+    "email_verified": true,
+    "confirmation_code": "34",
+    "password": "845",
+    "created_at": "2001-03-03T00:00:00.000Z",
+    "updated_at": "2007-03-02T00:00:00.000Z",
+    "address": "4553",
+    "comment": "good",
+    "driver": "alekii",
+    "orders": "beef",
+    "restaurant_owner": "kadesh"
+  }
+
+###
+POST http://localhost:3000/api/restaurant
+Content-Type: application/json
+{
+     "id": 5,
+    "name": "moses",
+    "contact_phone": "+25407999",
+    "email": "@gmail",
+    "email_verified": true,
+    "confirmation_code": "34",
+    "password": "845",
+    "created_at": "2001-03-03T00:00:00.000Z",
+    "updated_at": "2007-03-02T00:00:00.000Z",
+    "address": "4553",
+    "comment": "good",
+    "driver": "alekii",
+    "orders": "beef",
+    "restaurant_owner": "kadesh"  
+    
+}
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ###
 GET http://localhost:3000/api/users
@@ -10,9 +85,7 @@ Content-Type: application/json
 
 {
     "id":1,
-    "contact_phone":"+25434",
-    "contact_email":"<EMAIL>",
-    "contact_name":"<NAME>"
+    
 }
 ###
 POST http://localhost:3000/api/auth/login
@@ -36,8 +109,8 @@ Content-Type: application/json
 }
 ###
 GET http://localhost:3000/api/users
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtb3NlcyIsInJvbGUiOiJ1c2VyIiwiZXhwIjoxNzE4MjA0MDc4fQ.PJ3hQ2afQCHAtlzSvnu_PlcL3TBRZZvjXruEkRyJGaU
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJraW55dWEiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3MTgyOTYzODF9.Ves_G6tX4E759x_07R9XenPB9sDtV9-eEGKyNBFSpjk
 ###
 GET http://localhost:3000/api/state
 
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJraW55dWEiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3MTgyNjAwMjl9.LxIpl0eSzWl3m8hzzM3N3LcItUzVtSCC_d1XP6Z0-G4
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJraW55dWEiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3MTgzODAyMjF9.MiWjwwqcoirMtd3wLa0xFrD2lj_aCU8fO2Ep8st8YXQ

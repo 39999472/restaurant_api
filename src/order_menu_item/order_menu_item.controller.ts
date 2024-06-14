@@ -4,7 +4,7 @@ import {Context} from "hono"
 
 export const list_order_menu_item = async (c: Context) => {
     try {
-        //limit the number of users to be returned
+        
 
         const limit = Number(c.req.query('limit'))
 
@@ -48,10 +48,10 @@ export const update_order_menu_item= async (c: Context) => {
 
     const order_menu_item= await c.req.json();
     try {
-        // search for the user
+        
         const searched_order_menu_item = await get_order_menu_itemService(id);
         if (searched_order_menu_item == undefined) return c.text("order_menu_item not found", 404);
-        // get the data and update it
+        
         const res = await update_order_menu_itemService(id, order_menu_item);
         // return a success message
         if (!res) return c.text("order_menu_item not updated", 404);
@@ -67,10 +67,10 @@ export const delete_order_menu_item = async (c: Context) => {
     if (isNaN(id)) return c.text("Invalid ID", 400);
 
     try {
-        //search for the user
+        
         const order_menu_item = await get_order_menu_itemService(id);
         if (order_menu_item == undefined) return c.text("order_menu_item not found", 404);
-        //deleting the user
+        
         const res = await delete_order_menu_itemService(id);
         if (!res) return c.text("order_menu_item not deleted", 404);
 

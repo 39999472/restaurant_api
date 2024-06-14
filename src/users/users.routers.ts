@@ -8,12 +8,8 @@ export const usersRouters=new Hono()
 
 
 
-//get all state
+
 usersRouters.get("/users",adminRoleAuth, list_users)
-
-
-
-//find one state
 
 usersRouters.get("/users/:id",userRoleAuth,get_users)
 //create a state
@@ -22,7 +18,7 @@ usersRouters.post("/users",zValidator('json',stateZod,(result,c)=>{
         return c.json(result.error,400)
     }
 }),create_users)
-//update a state
+
 usersRouters.put("/users/:id",update_users)
 
 

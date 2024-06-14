@@ -9,20 +9,20 @@ export const addressRouters=new Hono()
 
 
 
-//get all stateress", list_address)
+
 addressRouters.get("/address",adminRoleAuth,list_address)
 //
 
-//find one state
 
-addressRouters.get("/address/:id" ,userRoleAuth,get_address)
-//create a state
+
+addressRouters.get("/address/:id",userRoleAuth ,get_address)
+
 addressRouters.post("/address",zValidator('json',stateZod,(result,c)=>{
     if(!result.success){
         return c.json(result.error,400)
     }
 }),create_address)
-//update a state
+
 addressRouters.put("/address/:id",update_address)
 
 

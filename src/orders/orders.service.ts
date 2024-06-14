@@ -16,6 +16,7 @@ export const get_ordersService = async (id: number): Promise<TI_order| undefined
     })
 }
 
+
 export const create_ordersService = async (orders: TI_order) => {
     await db.insert(ordersTable).values(orders)
     return "orders created successfully";

@@ -4,7 +4,7 @@ import {Context} from "hono"
 
 export const list_status_catalog= async (c: Context) => {
     try {
-        //limit the number of users to be returned
+        
 
         const limit = Number(c.req.query('limit'))
 
@@ -48,12 +48,12 @@ export const update_status_catalog= async (c: Context) => {
 
     const status_catalog= await c.req.json();
     try {
-        // search for the user
+        
         const searched_status_catalog= await get_status_catalogService(id);
         if (searched_status_catalog == undefined) return c.text("status_catalog not found", 404);
-        // get the data and update it
+        
         const res = await update_status_catalogService(id, status_catalog);
-        // return a success message
+        
         if (!res) return c.text("status_catalog not updated", 404);
 
         return c.json({ msg: res }, 201);
@@ -67,10 +67,10 @@ export const delete_status_catalog = async (c: Context) => {
     if (isNaN(id)) return c.text("Invalid ID", 400);
 
     try {
-        //search for the user
+        
         const status_catalog = await get_status_catalogService(id);
         if (status_catalog == undefined) return c.text("status_catalog not found", 404);
-        //deleting the user
+        
         const res = await delete_status_catalogService(id);
         if (!res) return c.text("status_catalog not deleted", 404);
 
