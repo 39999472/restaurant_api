@@ -31,7 +31,7 @@ app.get('/',(c)=>{
   return c.html(
     `
     <h1>welcome to the RESTAURANT API</h1>
-    <b>NAME:<b>moses kinyua.
+    <b>NAME:<b>moses kinyua.<br/>
     <b>overveiw:<b>restaurant management and how to get data from restaurant using api
 
 
