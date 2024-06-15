@@ -27,6 +27,19 @@ const app=new Hono().basePath('/api');
 // app.use(trimTrailingSlash())
 
 
+app.get('/',(c)=>{
+  return c.html(
+    `
+    <h1>welcome to the RESTAURANT API</h1>
+    <b>NAME:<b>moses kinyua.
+    <b>overveiw:<b>restaurant management and how to get data from restaurant using api
+
+
+    
+
+  `)
+})
+
 app.get('/ok',(c)=>{
   return c.text('the server is running')
 })
