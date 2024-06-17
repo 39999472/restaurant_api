@@ -1,28 +1,30 @@
 import {Hono} from 'hono';
 import{zValidator} from "@hono/zod-validator"
-import{listCity,getCity,createCity,updateCity} from "./city.contoroller"
-import { stateZod } from '../validators';
-import { userRoleAuth,adminRoleAuth } from '../middleware/bearAuth';
+import{listCity,getCity,createCity,updateCity,deleteCity} from "./city.contoroller"
+import { cityZod } from '../validators';
+import { userRoleAuth,adminRoleAuth, bothRoleAuth } from '../middleware/bearAuth';
 export const cityRouters=new Hono()
 
 
 
 
+//get all cities
+cityRouters
+.get("/city",bothRoleAuth, listCity)
 
-cityRouters.get("/city",adminRoleAuth, listCity)
-
-
-
-
-
-cityRouters.get("/city/:id",userRoleAuth,getCity)
-
-cityRouters.post("/city",zValidator('json',stateZod,(result,c)=>{
-    if(!result.success){
-        return c.json(result.error,400)
+.post("/city", zValidator('json', cityZod, (result, c) => {
+    if (!result.success) {
+        return c.json(result.error, 400);
     }
-}),createCity)
+}), adminRoleAuth, createCity)
 
-cityRouters.put("/city/:id",updateCity)
+cityRouters
+.get("/city/:id",bothRoleAuth,getCity)
+.put("city/:id", zValidator('json', cityZod, (result, c) => {
+    if (!result.success) {
+        return c.json(result.error, 400);
+    }
+}),adminRoleAuth, updateCity)
 
 
+.delete("/city/:id",adminRoleAuth,deleteCity)

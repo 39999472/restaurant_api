@@ -19,20 +19,9 @@ export const userLoginService = async (user: TSAuthOnUser) => {
         with: {
             user: {
                 columns: {
-                    id:true,
-                    name:true,
-                    contact_phone:true,
-                    email:true,
-                    email_verified:true,
-                    confirmation_code:true,
-                    password:true,
-                    created_at:true,
-                    updated_at:true,
-                    address:true,
-                    comment:true,
-                    driver:true,
-                    orders:true,
-                    restaurant_owner:true
+                  name:true,
+                  email:true,
+                  contact_phone:true,
                 
                     
                 

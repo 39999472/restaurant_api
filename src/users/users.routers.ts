@@ -1,24 +1,30 @@
 import {Hono} from 'hono';
 import{zValidator} from "@hono/zod-validator"
-import{list_users,get_users,create_users,update_users} from "./users.controller"
-import { stateZod } from '../validators';
-import{adminRoleAuth, userRoleAuth} from "../middleware/bearAuth"
+import{list_users,get_users,create_users,update_users,delete_users} from "./users.controller"
+import { usersZod } from '../validators';
+import{adminRoleAuth, bothRoleAuth, userRoleAuth} from "../middleware/bearAuth"
 export const usersRouters=new Hono()
 
 
 
 
 
-usersRouters.get("/users",adminRoleAuth, list_users)
+usersRouters.get("/users",bothRoleAuth,list_users)
 
-usersRouters.get("/users/:id",userRoleAuth,get_users)
-//create a state
-usersRouters.post("/users",zValidator('json',stateZod,(result,c)=>{
+
+
+usersRouters.post("/users",zValidator('json',usersZod,(result,c)=>{
     if(!result.success){
         return c.json(result.error,400)
     }
-}),create_users)
+}),adminRoleAuth,create_users)
+usersRouters.get("/users/:id",bothRoleAuth,get_users)
+usersRouters.put("/users/:id",zValidator('json',usersZod,(result,c)=>{
+    if(!result.success){
+        return c.json(result.error,400)
+    }
+}),adminRoleAuth,update_users)
 
-usersRouters.put("/users/:id",update_users)
+.delete("/users/:id",adminRoleAuth,delete_users)
 
 

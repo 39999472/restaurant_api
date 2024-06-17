@@ -1,28 +1,29 @@
 import {Hono} from 'hono';
 import{zValidator} from "@hono/zod-validator"
-import{listCategory,getCategory,createCategory,updateCategory} from "./category.controller"
-import { stateZod } from '../validators';
-import {userRoleAuth,adminRoleAuth} from "../middleware/bearAuth"
+import{listCategory,getCategory,createCategory,updateCategory,deleteCategory} from "./category.controller"
+import { categoryZod } from '../validators';
+import {userRoleAuth,adminRoleAuth, bothRoleAuth} from "../middleware/bearAuth"
 export const categoryRouters=new Hono()
 
 
 
 
-//get all state
-categoryRouters.get("/category",adminRoleAuth ,listCategory)
+//
+categoryRouters.get("/category",bothRoleAuth ,listCategory)
 
-
-
-
-
-categoryRouters.get("/category/:id",userRoleAuth,getCategory)
-//create a state
-categoryRouters.post("/category",zValidator('json',stateZod,(result,c)=>{
+categoryRouters.post("/category",zValidator('json',categoryZod,(result,c)=>{
     if(!result.success){
         return c.json(result.error,400)
     }
-}),createCategory)
+}),adminRoleAuth,createCategory)
 
-categoryRouters.put("/category/:id",updateCategory)
+categoryRouters
+.get("category/:id", bothRoleAuth, getCategory)
+.put("category/:id", zValidator('json', categoryZod, (result, c) => {
+    if (!result.success) {
+        return c.json(result.error, 400);
+    }
+}),adminRoleAuth, updateCategory)
+.delete("/category/:id",adminRoleAuth,deleteCategory)
 
 

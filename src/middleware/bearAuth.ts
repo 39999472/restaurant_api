@@ -2,7 +2,9 @@ import "dotenv/config"
 
 import {verify} from "hono/jwt";
  import {Context,Next} from "hono"
-
+interface HonoRequest<T,U>{
+    user?:T;
+}
 
 
  export const verifyToken= async(token: string, secret :string)=>{
@@ -16,7 +18,7 @@ import {verify} from "hono/jwt";
  }
 
 
- export const authMiddleware= async(c:Context,next:Next,requiredRole:string)=>{
+ export const authMiddleware= async(c:Context & {req:HonoRequest<any,unknown>},next:Next,requiredRole:string)=>{
 
 
     const token=c.req.header("authorization");
@@ -29,12 +31,15 @@ import {verify} from "hono/jwt";
     
      
             if(requiredRole === 'both'){
-                return  next();
+            if (decoded.role==="admin"||decoded.role==="user"){
+                c.req.user=decoded;
+                return next();
+
             }
-
-        if(decoded.role !==requiredRole)return c.json({error:"unauthorize"},401)
-
-        return next();
+            }else if(decoded.role===requiredRole){
+                c.req.user=decoded;
+                return next();
+            }
  }
 
 

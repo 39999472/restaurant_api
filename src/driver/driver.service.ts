@@ -29,4 +29,31 @@ export const update_driverService = async (id: number, driver: TI_driver) => {
 export const delete_driverService = async (id: number) => {
     await db.delete(driverTable).where(eq(driverTable.id, id))
     return "driver deleted successfully";
-}   
+}
+
+export const getDriverWithOrdersService=async(id:number)=>{
+    const driver=await db.query.driverTable.findFirst({
+        where:eq(driverTable.id,id),
+        columns:{
+            car_model:true,
+            car_make:true,
+            online:true
+        },
+        with:{
+            user:{
+                columns:{
+                    name:true,
+                    email:true,
+                    contact_phone:true,
+                }
+            },
+            orders:{
+                columns:{
+                    delivery_address_id:true,
+                    estimated_delivery_time:true,
+                }
+            }
+        },
+    });
+    return driver;
+}

@@ -31,3 +31,41 @@ export const delete_ordersService = async (id: number) => {
     await db.delete(ordersTable).where(eq(ordersTable.id, id))
     return "orders deleted successfully";
 }
+
+// get orders details
+
+export const getOrderWithOtherTables=async(id:number)=>{
+    const orders=await db.query.ordersTable.findFirst({
+        where: eq(ordersTable.id,id),
+        columns:{
+            price: true,
+            discount: true,
+            final_price: true,
+            comment: true,
+        },
+        with: {
+            user: {
+                columns: {
+                    name: true,
+                    email: true,
+                    contact_phone: true,
+                }
+            },
+            restaurant: {
+                columns: {
+                    name: true,
+                    street_address: true,
+                    zip_code: true,
+                }
+            }
+            // delivery_address: {
+            //     columns: {
+            //         delivery_instructions: true,
+            //         street_address_1: true,
+            //         zip_code: true,
+            //     }
+            // }
+        }
+    });
+    return orders;
+}

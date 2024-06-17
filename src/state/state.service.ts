@@ -30,3 +30,18 @@ export const deleteStateService = async (id: number) => {
     await db.delete(stateTable).where(eq(stateTable.id, id))
     return "state deleted successfully";
 }
+// statewithCities
+export const getStateWithCitiesService = async (id: number): Promise<TS_state | undefined> => {
+    const state = await db.query.stateTable.findFirst({
+      where: eq(stateTable.id, id),
+      with: {
+        cities: {
+          columns: {
+            name: true,
+  
+          }
+        }
+      }
+    });
+    return state;
+  }

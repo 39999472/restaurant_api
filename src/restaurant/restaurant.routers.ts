@@ -1,8 +1,8 @@
 import {Hono} from 'hono';
 import{zValidator} from "@hono/zod-validator"
-import{listRestaurant,getRestaurant,createRestaurant,updateRestaurant} from "./restaurant.controller"
-import { stateZod } from '../validators';
-import { adminRoleAuth, userRoleAuth } from '../middleware/bearAuth';
+import{listRestaurant,getRestaurant,createRestaurant,updateRestaurant,deleteRestaurant} from "./restaurant.controller"
+import { restaurantZod } from '../validators';
+import { adminRoleAuth, bothRoleAuth, userRoleAuth } from '../middleware/bearAuth';
 
 export const restaurantRouters=new Hono()
 
@@ -10,14 +10,19 @@ export const restaurantRouters=new Hono()
 
 
 
-restaurantRouters.get("/restaurant", adminRoleAuth,listRestaurant)
-restaurantRouters.get("/restaurant/:id",userRoleAuth ,getRestaurant)
+restaurantRouters.get("/restaurant",bothRoleAuth,listRestaurant)
 
-restaurantRouters.post("/restaurant",zValidator('json',stateZod,(result,c)=>{
+
+restaurantRouters.post("/restaurant",zValidator('json',restaurantZod,(result,c)=>{
     if(!result.success){
         return c.json(result.error,400)
     }
-}),createRestaurant)
+}),adminRoleAuth,createRestaurant)
+restaurantRouters.get("/restaurant/:id",bothRoleAuth,getRestaurant)
+restaurantRouters.put("/restaurant/:id",zValidator('json',restaurantZod,(result,c)=>{
+    if(!result.success){
+        return c.json(result.error,400)
+    }
+}),adminRoleAuth,updateRestaurant)
 
-restaurantRouters.put("/restaurant/:id",updateRestaurant)
-
+.delete("/restaurant/:id",adminRoleAuth,deleteRestaurant)

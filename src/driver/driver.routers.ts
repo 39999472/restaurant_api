@@ -1,30 +1,33 @@
 import {Hono} from 'hono';
 import{zValidator} from "@hono/zod-validator"
-import{list_driver,get_driver,create_driver,update_driver} from "./driver.controller"
-import { stateZod } from '../validators';
-import { adminRoleAuth,userRoleAuth } from '../middleware/bearAuth';
+import{list_driver,get_driver,create_driver,update_driver,delete_driver} from "./driver.controller"
+import { driverZod } from '../validators';
+import { adminRoleAuth,bothRoleAuth,userRoleAuth } from '../middleware/bearAuth';
 export const driverRouters=new Hono()
 
 
 
 
 
-driverRouters.get("/driver",adminRoleAuth ,list_driver)
+driverRouters.get("/driver",bothRoleAuth ,list_driver)
 
 
-
-
-
-driverRouters.get("/driver/:id",userRoleAuth,get_driver)
-
-
-driverRouters.post("/driver",zValidator('json',stateZod,(result,c)=>{
+driverRouters
+.post("/driver",zValidator('json',driverZod,(result,c)=>{
     if(!result.success){
         return c.json(result.error,400)
     }
-}),create_driver)
+}),adminRoleAuth,create_driver)
 
-driverRouters.put("/driver/:id",update_driver)
+driverRouters
+.get("/driver/:id",bothRoleAuth,get_driver)
+.put("/driver/:id",zValidator('json',driverZod,(result,c)=>{
+    if(!result.success){
+        return c.json(result.error,400)
+    }
+}),adminRoleAuth,update_driver)
+.delete("/driver/:id",adminRoleAuth,delete_driver)
+
 
 
 

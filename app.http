@@ -1,5 +1,6 @@
 
-GET http://localhost:3000/api
+GET http://localhost:3000/api/orders
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJraW55dWEiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3MTg2MDkwNDR9.EawLKzzzuNoi909C03N4_IRO84N4rF8Eswa-XmNTj1E
 ###
 
 GET http://localhost:3000/api/users/1
@@ -25,7 +26,7 @@ Content-Type: application/json
   }
 
 ###
-POST http://localhost:3000/api/restaurant
+POST http://localhost:3000/api/city
 Content-Type: application/json
 {
      "id": 5,

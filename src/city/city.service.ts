@@ -29,4 +29,5 @@ export const updateCityService = async (id: number, city: TI_city) => {
 export const deleteCityService = async (id: number) => {
     await db.delete(cityTable).where(eq(cityTable.id, id))
     return "city deleted successfully";
-}        
+}   
+//
